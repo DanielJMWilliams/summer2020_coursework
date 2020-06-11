@@ -2,13 +2,12 @@
 <html>
     <body>
 
-        <ul>
-            {% for post in posts %}
-                <li>post.title</li>
-            {% empty %}
-                There are no posts
-            {% endfor %}
-        </ul>
+        {% for post in posts %}
+            <h1>post.title</h1>
+        {% empty %}
+            There are no posts
+        {% endfor %}
+        
 
     </body>
 </html>
