@@ -3,7 +3,7 @@
     <body>
 
         {% for post in posts %}
-            <h1>post.title</h1>
+            <h1>{{post.title}}</h1>
         {% empty %}
             There are no posts
         {% endfor %}
