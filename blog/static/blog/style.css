@@ -1,0 +1,52 @@
+@keyframes hideit {
+    0% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+    }
+}
+
+@keyframes showit {
+    0% {
+        opacity: 0;
+        line-height: 0%;
+    }
+    100% {
+        opacity: 1;
+        line-height: 100%;
+    
+    }
+}
+
+.body{
+    margin: 20px;
+}
+
+
+.post{
+    padding: 10px;
+    border: solid black 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.hideit {
+    animation-name: hideit;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-play-state: running;
+}
+
+.showit {
+    animation-name: showit;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-play-state: running;
+}
+
