@@ -1,0 +1,46 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Music Run{% endblock%}
+
+{% block body %}
+<div style="margin:20px">
+
+    {% if error_message != None %}
+        <div class="alert alert-danger" role="alert">
+            Error - {{error_message}}
+        </div>
+    {% endif %}
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h1 style="font-weight:300;">Spotify Run</h1>
+        <h5 style="font-weight:300;">Generate personalised running playlists</h5>
+        {% if user_id == None %}
+            <p>Login with Spotify to import your library and generate running playlists</p>
+            <a class="btn btn-success" href="https://accounts.spotify.com/en/authorize?client_id=9f4b40f8f3614b4bbf5a108a81408477&response_type=code&redirect_uri=http://127.0.0.1:8000/musicRun/callback&scope=user-read-private user-library-read playlist-modify-public playlist-read-private&show_dialog=true">Login with Spotify</a>
+        {% endif %}
+    </div>
+
+    <table class="table table-striped" id="songs">
+        <tbody>
+            <tr>
+                {% load static %}
+                <td class="info-td"><img  style="width:100%;" src="{% static 'musicRun/spotify_logo_edit.png' %}" alt="spotify_logo"></td>
+                <td style="vertical-align: middle;">Login with Spotify</td>
+            </tr>
+            <tr>
+                <td class="info-td"> <i class="material-icons">library_music</i></td>
+                <td style="vertical-align: middle;"><a href="{% url 'importedSongs' %}">Import</a> liked songs</td>
+            </tr>
+            <tr>
+                <td class="info-td"> <i class="material-icons">create</i></td>
+                <td style="vertical-align: middle;"><a href="{% url 'generate' %}">Generate</a> running playlists</td>
+            </tr>
+            <tr>
+                <td class="info-td" > <i class="material-icons">playlist_play</i></td>
+                <td style="vertical-align: middle;">Browse <a href="{% url 'importedSongs' %}">imported songs</a> and <a href="{% url 'playlists' %}">playlists</a></td>
+            </tr>
+        </tbody>
+      </table>
+
+</div>
+
+{% endblock %}

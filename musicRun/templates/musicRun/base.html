@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'musicRun/style.css' %}">
+    <script src="{% static 'musicRun/base.js' %}"></script>
+    {% block head %}
+    {% endblock %}
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <i class="material-icons" style="display: inline-flex;vertical-align: top;">music_note</i>
+            Spotify Run
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a href="{% url 'index' %}" class="nav-item nav-link">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">home</i>
+                    Home
+                </a>
+                {% if user_id == None %}
+                <a class="nav-item nav-link" href="https://accounts.spotify.com/en/authorize?client_id=9f4b40f8f3614b4bbf5a108a81408477&response_type=code&redirect_uri=http://127.0.0.1:8000/musicRun/callback&scope=user-read-private user-library-read playlist-modify-public playlist-read-private&show_dialog=true">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">account_circle</i>
+                    Login with Spotify
+                </a>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'importedSongs' %}">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">library_music</i>
+                    Library
+                </a>
+                <a class="nav-item nav-link" href="{% url 'generate' %}">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">create</i>
+                    Generate
+                </a>
+                <a class="nav-item nav-link" href="{% url 'playlists' %}">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">playlist_play</i>
+                    Playlists
+                </a>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">
+                    <i class="material-icons" style="display: inline-flex;vertical-align: top;">account_circle</i>
+                    {{ user_id }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}
+    {% endblock %}
+</body>
+
+</html>

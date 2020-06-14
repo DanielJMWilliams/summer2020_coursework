@@ -1,0 +1,35 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Music Run{% endblock%}
+
+{% block body %}
+<div style="margin: 20px;">
+    <h1 style="text-align: center;">Playlists</h1>
+    {% if user_id == None %}
+        <div class="alert alert-danger" role="alert">
+            Error - You must <a href="https://accounts.spotify.com/en/authorize?client_id=9f4b40f8f3614b4bbf5a108a81408477&response_type=code&redirect_uri=http://127.0.0.1:8000/callback&scope=user-read-private user-library-read playlist-modify-public playlist-read-private&show_dialog=true">login</a> before you can view your playlists.
+        </div>
+    {% else %}
+        <div class="container mt-3">
+            <div class="row justify-content-around">
+                {% for playlist in playlists %}
+                    <div class="card-deck">
+                        <div class="card mb-4" style="min-width: 20rem; max-width: 20rem;">
+                            <img class="card-img-top" src={{playlist.image}}>
+                            <div class="card-body">
+                                <h5 class="card-title">{{playlist.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">by {{playlist.creator}}</h6>
+                            
+                                <a href="{% url 'playlist' playlist.id %}" class="btn btn-secondary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                No playlists found
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+</div>
+
+{% endblock %}

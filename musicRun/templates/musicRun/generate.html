@@ -1,0 +1,101 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Music Run{% endblock%}
+
+{% block head %}
+{% load static %}
+<script src="{% static 'musicRun/generate.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div style="margin:20px">
+    <h1>Generate Running Playlist</h1>
+    <p>A playlist will be generated using <a href="{% url 'importedSongs' %}">imported songs</a> that match the criteria you specify below.</p>
+    <p>You can manually enter BPM or you can click the "Tap" buttons at a consistent pace to calculate BPM</p>
+
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            Success - {{message}}:
+            <a href="{{url}}" target="_blank">{{url}}</a>
+        </div>
+    {% elif success == False %}
+        <div class="alert alert-danger" role="alert">
+            Error - {{message}}
+        </div>
+    {% endif %}
+
+    {% if user_id == None %}
+        <div class="alert alert-danger" role="alert">
+            Error - You must <a href="https://accounts.spotify.com/en/authorize?client_id=9f4b40f8f3614b4bbf5a108a81408477&response_type=code&redirect_uri=http://127.0.0.1:8000/callback&scope=user-read-private user-library-read playlist-modify-public playlist-read-private&show_dialog=true">login</a> before you can generate a running playlist.
+        </div>
+    {% elif numSongs == 0 %}
+        <div class="alert alert-danger" role="alert">
+            Error - You must <a href="{% url 'importedSongs' %}">import</a> songs before you can generate a running playlist.
+        </div>
+    {% else %}
+        <form action="{% url 'createRunningPlaylist' %}" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="min-bpm">Minimum BPM</label>
+                    <div class="d-flex flex-row">
+                        <input type="number" name="min-bpm" id="min-bpm" class="form-control">
+                        <button class="btn btn-secondary tap" data-target="#min-bpm" title="Click at consistent pace">Tap</button>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="max-bpm">Maximum BPM</label>
+                    <div class="d-flex flex-row">
+                        <input type="number" name="max-bpm" id="max-bpm" class="form-control">
+                        <button class="btn btn-secondary tap" data-target="#max-bpm" title="Click at consistent pace">Tap</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button style="width: 100%;" class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Advanced Settings
+                        <i class="material-icons" style="display: inline-flex;vertical-align: top;">arrow_downward</i>
+                    </button>
+                </div>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="duration">Approximate playlist duration (minutes)</label>
+                        <input type="number" name="duration" id="duration" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="number-of-songs">Number of songs</label>
+                        <input type="number" name="number-of-songs" id="number-of-songs" class="form-control">
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="min-song-duration">Minimum song duration (minutes)</label>
+                        <input type="number" step="0.01" name="min-song-duration" id="min-song-duration" class="form-control">
+                        
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="max-song-duration">Maximum song duration (minutes)</label>
+                        <input type="number" step="0.01" name="max-song-duration" id="max-song-duration" class="form-control">
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <div class="form-group col-md-6">
+                        <input class="form-check-input" type="checkbox" name="bpm-ascending" id="bpm-ascending">
+                        <label class="form-check-label" for="bpm-ascending">Order by Ascending BPM</label>
+                    </div>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-success">Generate</button>
+        {% endif %}
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Playlist{% endblock%}
+
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#songs').DataTable();
+} );
+</script>
+{% endblock %}
+
+{% block body %}
+<div style="margin:20px">
+    <div class="content-container">
+        <img src={{playlist.image_url}} alt="album art" class="image-fluid" style="margin: 10px;">
+        <div >
+            <h2>{{playlist.name}}</h2>
+            <p>Average Tempo: {{playlist.tempo.average}} BPM</p>
+            <p>Tempo Range: {{playlist.tempo.min}}-{{playlist.tempo.max}} BPM</p>
+        </div>
+
+    </div>
+
+    <br>
+    <div>
+        <table class="table table-light" id="songs">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Artist</th>
+                <th scope="col">BPM</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for track in playlist.tracks %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{track.name}}</td>
+                        <td>{{track.artists}}</td>
+                        <td>{{track.bpm}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

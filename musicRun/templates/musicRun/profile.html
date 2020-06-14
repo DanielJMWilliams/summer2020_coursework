@@ -1,0 +1,18 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Music Run{% endblock%}
+
+{% block head %}
+{% load static %}
+<script src="{% static 'musicRun/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div style="margin:20px">
+
+    <hr>
+    <a href="{% url 'spotify_logout' %}">Logout</a>
+    <hr>
+
+</div>
+
+{% endblock %}

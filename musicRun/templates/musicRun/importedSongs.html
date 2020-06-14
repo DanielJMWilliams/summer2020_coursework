@@ -1,0 +1,75 @@
+{% extends "musicRun/base.html" %}
+{% block title %}Playlist{% endblock%}
+
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" ></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#songs').DataTable();
+} );
+</script>
+
+
+{% load static %}
+<script src="{% static 'musicRun/importSongs.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div style="margin:20px">
+    <h1 style="text-align: center;">Imported Songs</h1>
+    <hr>
+    <div class="content-container">
+        <div >
+            <p>Here you can import all of your liked songs on Spotify onto this website. </p>
+            <p><span id="numImported">{{playlist.tracks|length}}</span>/{{num_liked_songs}} songs imported</p>
+            <p><span id="percentageImported">{{percentage_imported}}</span>% of liked songs imported</p>
+            {% if percentage_imported != 100%}
+                <p>There are songs to import, click the 'Import Liked Songs' button below</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% if user_id == None %}
+        <div class="alert alert-danger" role="alert">
+            Error - You must <a href="https://accounts.spotify.com/en/authorize?client_id=9f4b40f8f3614b4bbf5a108a81408477&response_type=code&redirect_uri=http://127.0.0.1:8000/callback&scope=user-read-private user-library-read playlist-modify-public playlist-read-private&show_dialog=true">login</a> before you can import songs.
+        </div>
+    {% else %}
+
+        <div style="margin-top: 20px;">
+            <form>
+                {% csrf_token %}
+                <button class="btn btn-success" id="import-btn">Import Liked Songs</button>
+                <label id="btn-info"></label>
+            </form>
+        </div>
+
+        <br>
+        <div>
+            <table class="table table-light" id="songs">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Artist</th>
+                    <th scope="col">BPM</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for track in playlist.tracks %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{track.name}}</td>
+                            <td>{{track.artists}}</td>
+                            <td>{{track.bpm}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+.content-container{
+    overflow: auto;
+    border: solid white;
+    padding: 5px;
+}
+
+.image-fluid{
+    width: 30%;
+    height: auto;
+    float: left;
+
+}
+
+
+.info-td{
+    width: 5rem;
+}
+
+.info-td i{
+    font-size: 5rem;
+    color: #53b14f;
+}
+
+nav{
+    background-color: #53b14f;
+}
+
+.btn-success{
+    background-color: #53b14f;
+}

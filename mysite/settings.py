@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,6 +23,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')f-w_#el2%6*bcymh&2et_p$w6n+o%ui)tdm!ej#v_$8nw7fjr'
 
+#environment variables
+SPOTIFY_CID = config("SPOTIFY_CID", default=False)
+SPOTIFY_CS = config("SPOTIFY_CS", default=False)
+
+
+# Check for environment variable
+if not SPOTIFY_CID:
+    raise RuntimeError("SPOTIFY_CID is not set")
+if not SPOTIFY_CS:
+    raise RuntimeError("SPOTIFY_CS is not set")
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -31,6 +44,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'musicRun.apps.MusicrunConfig',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
