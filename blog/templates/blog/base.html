@@ -22,13 +22,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script id="blog_post" type="text/template">
         {% verbatim %}
-        <div class="post z-depth-2">
+        <div class="post">
             <div>
-                <h3>{{title}}</h3>
-                <p>Author: {{author}}</p>
-                <p>Published: {{date}}</p>
+                <div class="title">{{title}}</div>
+                <div class="sub-title">by {{author}}, {{date}}</div>
                 <hr>
-                <p>{{content}}</p>
+                <div class="post-content">{{content}}</div>
+            </div>
+        </div>
+        {% endverbatim %}
+    </script>
+
+    <script id="project_post" type="text/template">
+        {% verbatim %}
+        <div class="post">
+            <div>
+                <div class="title">{{title}}</div><hr>
+                <div class="video">
+                    <iframe width="560" height="315" src={{link}} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="post-content">{{content}}</div>
             </div>
         </div>
         {% endverbatim %}

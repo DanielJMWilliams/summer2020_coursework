@@ -23,16 +23,52 @@
     }
 }
 
+
 .body{
     margin: 20px;
 }
 
+.brand-logo{
+    line-height: 30px;
+    margin-top: 10px;
+}
 
 .post{
     padding: 10px;
-    border: solid black 1px;
+    /*border: solid black 1px;*/
     margin-top: 20px;
     margin-bottom: 20px;
+    overflow: auto;
+
+    border-radius: 40px;
+    background: #ecf0f3;
+    box-shadow: 13px 13px 20px #cbced1,
+                -13px -13px 20px #e4e3e3;
+}
+
+.video{
+    float: left;
+    margin:20px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 24px;
+    line-height: 40px;
+}
+
+.sub-title {
+    text-align: center;
+    padding-top: 24px;
+    color: #999999;
+}
+
+.post-content{
+    padding: 24px;
+    font-size: 18px;
+    line-height: 30px;
+
 }
 
 
