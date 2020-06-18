@@ -44,6 +44,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'stiltonstriders.apps.StiltonstridersConfig',
     'musicRun.apps.MusicrunConfig',
     'blog.apps.BlogConfig',
     'django.contrib.admin',
