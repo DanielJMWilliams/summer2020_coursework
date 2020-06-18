@@ -1,0 +1,20 @@
+{% extends "stiltonstriders/base.html" %}
+{% block title %}Stilton Striders{% endblock%}
+
+{% block body %}
+{% load static %}
+<script src="{% static 'stiltonstriders/javascript/calendar.js' %}"></script>
+
+
+<div class="body-div">
+    <h1>Events</h1>
+    <div>
+        <p>Below is a list of events</p>
+    </div>
+    <iframe src="https://outlook.office365.com/owa/calendar/1b4eb3ea07d54647a5da592c81faaba6@student.bham.ac.uk/2f46a2c37d3247c89e6b09c4e70bcbf67537143554117348994/calendar.html" scrolling="no" width="100%" height="700" frameborder="0"></iframe>
+
+
+
+</div>
+
+{% endblock %}

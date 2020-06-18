@@ -1,0 +1,82 @@
+{% extends "stiltonstriders/base.html" %}
+{% block title %}Stilton Striders{% endblock%}
+
+{% block head %}
+
+{% load static %}
+<script src="{% static 'stiltonstriders/javascript/calendar.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script id="week-template" type="text/template">
+    {% verbatim %}
+    <div class="week">
+        {{#each days}}
+            <button class="day grid-element">{{this}}</button>
+        {{/each}}
+    </div>
+    {% endverbatim %}
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div class="body-div">
+    <h1>Events</h1>
+    <div>
+        <p>Below is a list of events</p>
+    </div>
+    <div class="calendar">
+        {% csrf_token %}
+        <div>
+            <h2>
+                <span id="month" data-month_num="{{month_num}}">{{month_name}}</span>
+                <span id="year">{{year}}</span>
+            </h2>
+            <button class="btn" id="offset-month-backwards">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <button class="btn" id="offset-month-forwards">
+                <i class="material-icons">arrow_downward</i>
+            </button>
+        </div>
+        <div class="week-header">
+            <div class="grid-element">
+                M
+            </div>
+            <div class="grid-element">
+                T
+            </div>
+            <div class="grid-element">
+                W
+            </div>
+            <div class="grid-element">
+                T
+            </div>
+            <div class="grid-element">
+                F
+            </div>
+            <div class="grid-element">
+                S
+            </div>
+            <div class="grid-element">
+                S
+            </div>
+        </div>
+        <div class="weeks">
+        </div>
+        <hr>
+        <div class="day-info">
+            <h2 id="selected-date"></h2>
+            <div class="events">
+                <ul id="events-list">
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}
