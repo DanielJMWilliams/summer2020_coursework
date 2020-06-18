@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function load_page(id) {
 
     const request = new XMLHttpRequest();
-    request.open('GET', `/summer_coursework/${id}`);
+    request.open('GET', id);
     request.onload = () => {
         const response = request.responseText;
         const data = JSON.parse(request.responseText);
