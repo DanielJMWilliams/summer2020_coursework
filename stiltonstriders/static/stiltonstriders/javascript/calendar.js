@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function getMonth(month) {
     //get pizza price from server
     const request = new XMLHttpRequest();
-    request.open('POST', "/getMonth");
+    request.open('POST', "getMonth");
     //console.log(request);
 
     // Include csrf token in header so Django will accept the request
@@ -89,7 +89,7 @@ function getEvents(day, month, year) {
 
     //get pizza price from server
     const request = new XMLHttpRequest();
-    request.open('POST', "/getEvents");
+    request.open('POST', "getEvents");
     //console.log(request);
 
     // Include csrf token in header so Django will accept the request
